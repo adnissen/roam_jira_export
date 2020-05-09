@@ -1,5 +1,7 @@
 # roam_JIRA_export
 
+![proof it worked at some point](./jiraexport.png)
+
 A chrome extension that exports the current page to JIRA text format and copies it to the clipboard. Currently supports:
 
 * ```
