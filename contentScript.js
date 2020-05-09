@@ -50,6 +50,8 @@ function exportToJira() {
                 } else {
                     resultStr = resultStr + "[ ] " + childNode.textContent;
                 }
+            } else if (childNode.nodeName == "DIV" && !!childNode.children[1] && !!childNode.children[1].children[0] && childNode.children[1].children[0].src) { //it's an image, we think 
+                resultStr = resultStr + "!" + childNode.children[1].children[0].src + "!";
             } else if (childNode.nodeName == "DIV") { //it's a div, but it has no child, so we don't think it's a code block. just naively get the text from the div.
                 resultStr = resultStr + childNode.textContent;
             }
@@ -118,5 +120,3 @@ var t = setInterval(function(){
         console.log("no menu!");
     }
 }, 250);
-
-console.log('loaded');

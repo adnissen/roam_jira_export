@@ -9,6 +9,7 @@ A chrome extension that exports the current page to JIRA text format and copies 
   ``` 
 * :white_check_mark: TODO entries
 * `inline` code
+* images :sunrise_over_mountains:
 
 To use, clone the repository and open the chrome "extensions" window. Enable developer mode, click "load unpacked extension" and locate the cloned repo.
 
