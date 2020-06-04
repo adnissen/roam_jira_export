@@ -78,7 +78,7 @@ function exportToJira() {
         var outString = ""
         output.forEach(element => {
             if (typeof(element) == "string") {
-                outString = outString.concat("* ".repeat(level), element, "\n");
+                outString = outString.concat("*".repeat(level), " ", element, "\n");
             } else {
                 outString = outString.concat(makeOutput(element, level + 1));
             }
