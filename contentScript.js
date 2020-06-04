@@ -40,8 +40,10 @@ function exportToJira() {
             if (childNode.nodeName == "#text") {
                 //just add text right to the result string
                 resultStr = resultStr + childNode.wholeText;
-            } else if (childNode.nodeName == "DIV" && !!childNode.children[0] && childNode.children[0].nodeName == "TEXTAREA") { //1 is div. if it has a child assume it's a code block
+            } else if (childNode.nodeName == "DIV" && childNode.children[0].nodeName == "TEXTAREA") { //1 is div. if it has a child assume it's a code block
                 resultStr = resultStr + "{code}\n" + childNode.children[0].textContent + "\n{code}";
+            } else if (childNode.nodeName == "DIV" && childNode.children[1] && childNode.children[1].nodeName == "TEXTAREA") {
+                resultStr = resultStr + "{code}\n" + childNode.children[1].textContent + "\n{code}";
             } else if (childNode.nodeName == "CODE") {
                 resultStr = resultStr + "{{" + childNode.textContent + "}}";
             } else if (childNode.nodeName == "SPAN" && !!childNode.children[0] && childNode.children[0].classList.contains("check-container")) { //we've got a check box
