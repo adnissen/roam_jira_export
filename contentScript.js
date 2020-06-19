@@ -93,32 +93,29 @@ function exportToJira() {
     return finalString;
 }
 
-var t = setInterval(function(){
-    var menu = document.getElementsByClassName('bp3-icon-more')[0];
-    if (!!menu) {
-        menu.addEventListener("click", function(){
-            //we need to wait 100ms for the menu element to render so we can append it
-            //probably less, but I can't see it actually change so I don't think it matters
-            setTimeout(function(){
-                //add our button to the menu
-                var template = document.createElement('template');
-                template.innerHTML = '<li class="jira-export"><a class="bp3-menu-item bp3-popover-dismiss"><div class="bp3-text-overflow-ellipsis bp3-fill">Export to JIRA</div></a></li>'
-                document.getElementsByClassName("bp3-menu")[0].appendChild(template.content);
-                document.getElementsByClassName("jira-export")[0].addEventListener("click", function(){
-                    navigator.permissions.query({name: "clipboard-write"}).then(result => {
-                        if (result.state == "granted" || result.state == "prompt") {
-                            navigator.clipboard.writeText(exportToJira()).then(function() {
-                                alert("Successfully Copied to Clipboard");
-                            }, function() {
-                                alert("Some sort of Error, check console for details");
-                            });
-                        }
-                    });
+var menu = document.getElementsByClassName('bp3-icon-more')[0];
+if (!!menu) {
+    menu.addEventListener("click", function(){
+        //we need to wait 100ms for the menu element to render so we can append it
+        //probably less, but I can't see it actually change so I don't think it matters
+        setTimeout(function(){
+            //add our button to the menu
+            var template = document.createElement('template');
+            template.innerHTML = '<li class="jira-export"><a class="bp3-menu-item bp3-popover-dismiss"><div class="bp3-text-overflow-ellipsis bp3-fill">Export to JIRA</div></a></li>'
+            document.getElementsByClassName("bp3-menu")[0].appendChild(template.content);
+            document.getElementsByClassName("jira-export")[0].addEventListener("click", function(){
+                navigator.permissions.query({name: "clipboard-write"}).then(result => {
+                    if (result.state == "granted" || result.state == "prompt") {
+                        navigator.clipboard.writeText(exportToJira()).then(function() {
+                            alert("Successfully Copied to Clipboard");
+                        }, function() {
+                            alert("Some sort of Error, check console for details");
+                        });
+                    }
                 });
-            }, 100);
-        });
-        clearInterval(t);
-    } else {
-        console.log("no menu!");
-    }
-}, 250);
+            });
+        }, 100);
+    });
+} else {
+    console.log("no menu!");
+}
